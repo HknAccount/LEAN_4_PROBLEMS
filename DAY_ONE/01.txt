@@ -1,0 +1,35 @@
+---------------------------------------------------------
+LEAN 4 PROOF EXPLANATION: OR COMMUTATIVITY
+Theorem: P ∨ Q → Q ∨ P
+---------------------------------------------------------
+
+CODE:
+theorem or_commutative (P Q : Prop) : P ∨ Q → Q ∨ P := by
+  intro h
+  cases h with
+  | inl hp => exact Or.inr hp
+  | inr hq => exact Or.inl hq
+
+
+STEP-BY-STEP BREAKDOWN:
+
+1. "intro h"
+- What it does: We assume the premise (P ∨ Q) is true and give this assumption the name "h".
+
+2. "cases h with"
+- What it does: Since "h" is an OR statement (P ∨ Q), we must look at the two possible branches. We have to prove our goal (Q ∨ P) works in both cases.
+
+3. LEFT BRANCH: | inl hp => exact Or.inr hp
+- "inl hp": We are in the branch where the left side of "h" is true. We name the proof of P "hp".
+- "exact": A command that tells Lean, "Here is the exact term that solves the current goal." (Note: It does not literally mean "true").
+- "Or.inr hp": Our goal is to prove Q ∨ P. Since we only have a proof of P, we must prove the RIGHT side of our goal. "Or.inr" means "Introduce Right". It builds the proof of (Q ∨ P) using our proof of P (hp).
+
+4. RIGHT BRANCH: | inr hq => exact Or.inl hq
+- "inr hq": We are in the branch where the right side of "h" is true. We name the proof of Q "hq".
+- "exact Or.inl hq": Our goal is Q ∨ P. Since we have a proof of Q (hq), we must prove the LEFT side of our goal. "Or.inl" means "Introduce Left". It builds the proof of (Q ∨ P) using our proof of Q (hq).
+
+
+KEY TAKEAWAYS / CORRECTIONS:
+* "exact" means "here is the final answer term", not "true".
+* "Or.inr" and "Or.inl" mean "prove the right/left side of the goal", not "swap". The "swap" happens naturally because we are forced to choose the opposite side to fulfill the new goal.
+---------------------------------------------------------

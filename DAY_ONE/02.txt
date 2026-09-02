@@ -1,0 +1,32 @@
+---
+
+## LEAN 4 PROOF EXPLANATION: AND INTRODUCTION
+Theorem: (P : Prop) → (Q : Prop) → P → Q → P ∧ Q
+
+CODE:
+theorem and_intro (P Q : Prop) (hp : P) (hq : Q) : P ∧ Q := by
+constructor
+· exact hp
+· exact hq
+
+STEP-BY-STEP BREAKDOWN:
+
+1. "constructor"
+
+* What it does: Since our goal is an AND statement ($P \land Q$), the `constructor` tactic splits the single goal into two separate sub-goals: one to prove the left side ($P$) and one to prove the right side ($Q$).
+
+2. FIRST SUB-GOAL: `· exact hp`
+
+* What it does: The current sub-goal is to prove $P$. We use `exact hp` to fulfill this goal directly using the hypothesis `hp` that was provided in the theorem arguments.
+
+3. SECOND SUB-GOAL: `· exact hq`
+
+* What it does: The current sub-goal is to prove $Q$. We use `exact hq` to fulfill this goal directly using the hypothesis `hq` provided in the theorem arguments.
+
+KEY TAKEAWAYS / CORRECTIONS:
+
+* `constructor` targets conjunctive goals, breaking an AND statement into its component parts so you can prove them independently.
+* The dot bullets (`·`) are used in Lean 4 to structure and isolate proofs for individual sub-goals.
+* *(Alternative)* You can also prove this in a single line using anonymous constructor notation without tactics: `exact ⟨hp, hq⟩`.
+
+---

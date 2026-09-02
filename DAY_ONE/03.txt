@@ -1,0 +1,28 @@
+---------------------------------------------------------
+LEAN 4 PROOF EXPLANATION: ADDITION SUCCESSOR DEFINITION
+Theorem: m + n.succ = (m + n).succ
+---------------------------------------------------------
+
+CODE:
+theorem add_succ (m n : Nat) : m + n.succ = (m + n).succ := by
+  rfl
+
+
+STEP-BY-STEP BREAKDOWN:
+
+1. The Definition of Addition in Lean
+- In Lean, addition for Natural numbers (Nat) isn't just magic; it is defined by two built-in, fundamental rules:
+  Rule 1 (Base case): m + 0 = m
+  Rule 2 (Successor case): m + n.succ = (m + n).succ
+- Notice that Rule 2 is literally the exact same equation as our theorem!
+
+2. "rfl" (Reflexivity)
+- What it does: "rfl" is a tactic used to prove that the left side of an equals sign is identical to the right side (the property of reflexivity, or x = x).
+- Why it works here: Because `m + n.succ` is the literal, hard-coded definition of how to add a successor in Lean, both sides of your equation are what we call "definitionally equal". To the Lean compiler, they mean the exact same thing.
+- Result: "rfl" evaluates both sides, sees they are identical by definition, and instantly solves the goal.
+
+
+KEY TAKEAWAYS:
+* You don't always need complex tactics for math proofs. If an equation is true simply based on how a function (like addition) is defined under the hood, "rfl" is all you need.
+* Lean defines addition by looking at the SECOND number (n). If the theorem was flipped to `m.succ + n = (m + n).succ`, "rfl" would NOT work, and you would be forced to use mathematical induction (the `induction` tactic) to prove it.
+---------------------------------------------------------
