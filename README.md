@@ -23,7 +23,8 @@ For every problem, there are two corresponding files:
 
 - **DAY TWO:**
   - `01`: Maximum of Appended Lists (Using `induction`, `simp`, `cases`, and associativity)
-  - `02` & `03`: *Coming soon*
+  - `02`: Addition with Zero on the Left (Using `induction`, `change`, `rw`, `rfl`)
+  - `03`: Principle of Explosion (Using `intro`, `exact False.elim`)
 
 *(Days 3-15 are currently being worked on and will be populated as I continue my learning journey!)*
 
