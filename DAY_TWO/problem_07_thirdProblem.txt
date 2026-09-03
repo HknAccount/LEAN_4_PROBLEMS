@@ -1,0 +1,30 @@
+---
+
+## LEAN 4 PROOF EXPLANATION: PRINCIPLE OF EXPLOSION
+Theorem: False → 1 = 2
+
+CODE:
+theorem false_implies_anything : False → 1 = 2 := by
+  intro h
+  exact False.elim h
+
+STEP-BY-STEP BREAKDOWN:
+
+1. "intro h"
+
+* What it does: The goal is an implication `False → 1 = 2`. The `intro` tactic introduces the premise of the implication into our local context as a hypothesis. We name this hypothesis `h`.
+* We now have a hypothesis `h : False` and our new goal is to prove `1 = 2`.
+
+2. "exact False.elim h"
+
+* What it does: The `exact` tactic solves a goal by providing a specific term of the correct type.
+* "False.elim": This is the eliminator for the `False` type. Because the `False` type has no constructors (it is an empty type), if you somehow have a term of type `False`, you can use `False.elim` to construct a proof for *any* proposition. This is the logical principle of explosion (ex falso quodlibet).
+* By applying `False.elim` to our contradictory hypothesis `h`, we can prove `1 = 2`, or any other statement, closing the goal.
+
+KEY TAKEAWAYS / CORRECTIONS:
+
+* The `False` type in Lean represents a logical contradiction. It has no constructors, meaning it is impossible to construct a term of type `False` in an empty context.
+* When your context contains an impossible hypothesis (like `h : False`), you can prove anything using `False.elim`.
+* Implication proofs (`A → B`) typically start with `intro`, assuming the premise (`A`) to prove the conclusion (`B`).
+
+---

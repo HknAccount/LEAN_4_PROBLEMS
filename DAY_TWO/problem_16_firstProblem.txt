@@ -1,0 +1,57 @@
+---
+
+## LEAN 4 PROOF EXPLANATION: MAXIMUM OF APPENDED LISTS
+Theorem: (l₁ ++ l₂).max? = max l₁.max? l₂.max?
+
+CODE:
+import Mathlib
+
+theorem max?_append [Max α] [Std.Associative (max : α → α → α)] (l₁ l₂ : List α) :
+(l₁ ++ l₂).max? = max l₁.max? l₂.max? := by
+induction l₁ with
+| nil =>
+-- Base case: ([] ++ l₂).max? = l₂.max?, and max none l₂.max? simplifies to l₂.max?
+simp
+| cons a l ih =>
+-- Unfold list operations and apply the induction hypothesis
+simp only [List.cons_append, List.max?_cons, ih]
+-- Split into options (none/some) to allow `simp` to evaluate the option maximums.
+-- `Std.Associative.assoc` handles the associativity of the inner `max` elements.
+cases l.max? <;> cases l₂.max? <;> simp [Std.Associative.assoc]
+
+STEP-BY-STEP BREAKDOWN:
+
+1. "induction l₁ with"
+
+* What it does: We perform structural induction on the first list, `l₁`. This breaks our proof into two scenarios: one where the list is empty (`nil`), and one where it has at least one element (`cons`).
+
+2. BASE CASE: | nil => simp
+
+* "| nil": We are in the branch where `l₁` is the empty list `[]`.
+* "simp": Lean's automatic simplifier. It reduces `([] ++ l₂).max?` to `l₂.max?`. On the right side, it reduces `[].max?` to `none`, and evaluates `max none l₂.max?` to `l₂.max?`. Since both sides match perfectly, `simp` closes the goal.
+
+3. INDUCTIVE STEP: | cons a l ih =>
+
+* "| cons a l ih": We are in the branch where `l₁` is built by adding an element `a` to the front of a list `l` (often written `a :: l`).
+* "ih": The "Induction Hypothesis". We assume our theorem already holds for the smaller list `l`.
+
+4. "simp only [List.cons_append, List.max?_cons, ih]"
+
+* What it does: We tell Lean to simplify the goal, but *only* using these three specific rules, preventing it from getting lost.
+* "List.cons_append": Unfolds the append operation `(a :: l) ++ l₂` into `a :: (l ++ l₂)`.
+* "List.max?_cons": Unfolds the maximum of a list into the `max` of its first element and the max of the rest of the list.
+* "ih": Applies our assumption `(l ++ l₂).max? = max l.max? l₂.max?` to rewrite the concatenated tail of the list.
+
+5. "cases l.max? <;> cases l₂.max? <;> simp [Std.Associative.assoc]"
+
+* "cases ...": `max?` returns an `Option` (either `none` if empty, or `some x` if it has a max). Lean cannot evaluate the `max` of two abstract `Option`s without knowing which they are. `cases` splits the proof into these underlying `none`/`some` possibilities.
+* "<;>": This is a sequencing combinator. It means "run the tactic on the left, and then apply the tactic on the right to *all* the new subgoals generated."
+* "simp [Std.Associative.assoc]": Now that the `none` and `some` wrappers are exposed, `simp` can evaluate the operations. In the final branch where both lists actually have maximum values, `simp` uses the `Std.Associative.assoc` rule we provided to prove that `max a (max b c) = max (max a b) c`, completing the algebraic rearrangement.
+
+KEY TAKEAWAYS / CORRECTIONS:
+
+* Lists returning maximums return an `Option α` (because an empty list has no maximum). You must often use `cases` to unwrap `Option`s before Lean can do math on them.
+* The `<;>` combinator is a powerful way to write a single line of code that solves multiple branches at once (like a loop for tactics).
+* Lean's `simp` knows basic logic, but we often have to manually feed it algebraic properties like `Std.Associative.assoc` if it is dealing with abstract types (like an arbitrary type `α`).
+
+---

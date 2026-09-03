@@ -1,0 +1,45 @@
+---
+
+## LEAN 4 PROOF EXPLANATION: ADDITION WITH ZERO ON THE LEFT
+Theorem: 0 + n = n
+
+CODE:
+theorem zero_add (n : Nat) : 0 + n = n := by
+induction n with
+| zero => rfl
+| succ d ih =>
+change (0 + d) + 1 = d + 1
+rw [ih]
+
+STEP-BY-STEP BREAKDOWN:
+
+1. "induction n with"
+
+* What it does: We perform structural induction on the natural number `n`. This splits the proof into a base case for zero and an inductive step for the successor of a number `d`.
+
+2. BASE CASE: | zero => rfl
+
+* "| zero": We are in the branch where `n` is `0`. We need to prove `0 + 0 = 0`.
+* "rfl": This stands for reflexivity. Since addition of `0` on the right evaluates to the left operand by definition, `0 + 0` is simply `0`. Thus, both sides of the equation are definitionally equal, and `rfl` closes the goal.
+
+3. INDUCTIVE STEP: | succ d ih =>
+
+* "| succ d ih": We are in the branch where `n` is the successor of some natural number `d` (i.e., `n = d + 1`).
+* "ih": The Induction Hypothesis. We assume our theorem already holds for `d`, meaning `0 + d = d`.
+
+4. "change (0 + d) + 1 = d + 1"
+
+* What it does: The `change` tactic replaces the current goal with a definitionally equal one. By definition of addition in Lean, `a + (succ b)` is `succ (a + b)`, or `(a + b) + 1`. So, `0 + (d + 1)` is definitionally equal to `(0 + d) + 1`. This makes the structure of the expression clearer and prepares it for rewriting.
+
+5. "rw [ih]"
+
+* What it does: The `rw` (rewrite) tactic looks for the pattern on the left side of our induction hypothesis (`0 + d`) in the goal, and replaces it with the right side (`d`).
+* This transforms our goal `(0 + d) + 1 = d + 1` into `d + 1 = d + 1`. Since both sides are now identical, `rw` automatically applies reflexivity to close the goal.
+
+KEY TAKEAWAYS / CORRECTIONS:
+
+* In Lean, addition `a + b` is defined by induction on the second argument `b`. So `n + 0 = n` is true by definition, but `0 + n = n` requires a proof by induction.
+* The `change` tactic is a great way to unfold definitions or reshape a goal into a more readable or rewriteable form, as long as the new goal is definitionally equal to the old one.
+* Induction hypotheses (`ih`) are crucial for proving properties of recursively defined types like `Nat`.
+
+---
