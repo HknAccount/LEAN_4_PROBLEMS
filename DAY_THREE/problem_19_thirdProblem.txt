@@ -1,0 +1,15 @@
+Title: Transitivity of Implication (implies_trans)
+
+Problem: Prove that if `P → Q` and `Q → R`, then `P → R`. This establishes the transitivity of implication.
+
+Step-by-step Logic:
+1. The goal is to show `P → R`, which means we need to provide a function that takes a proof of `P` and returns a proof of `R`.
+2. We introduce an assumption `hp : P` into our context.
+3. We are already given functions `hpq : P → Q` and `hqr : Q → R`.
+4. First, we apply the function `hpq` to our assumption `hp`. This gives us a proof of `Q` (i.e., `hpq hp`).
+5. Next, we apply the function `hqr` to that proof of `Q`. This gives us a proof of `R`.
+6. The combined term `hqr (hpq hp)` exactly matches the required type `R`, successfully completing the proof.
+
+Tactics Used:
+- `intro`: Introduces the antecedent of an implication as a hypothesis into the local context.
+- `exact`: Closes the goal by providing an exact proof term that satisfies the current expected type.

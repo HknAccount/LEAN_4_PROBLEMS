@@ -1,0 +1,16 @@
+Title: Double Negation Elimination (not_not)
+
+Problem: Prove that `¬¬P → P` for any proposition `P`. This is the principle of double negation elimination, a core tenet of classical logic.
+
+Step-by-step Logic:
+1. The goal is an implication, so we introduce the hypothesis `h : ¬¬P`.
+2. We use the law of excluded middle (`by_cases`) on `P` to branch the proof into two possible scenarios: `P` is true, or `P` is false (`¬P`).
+3. If `P` is true (`hP : P`), the goal is trivially solved since we already have a proof of `P`.
+4. If `P` is false (`hP : ¬P`), we have both `¬P` and our original assumption `¬¬P` (which is equivalent to `¬P → False`). By applying `h` to `hP`, we derive a contradiction (`False`).
+5. Since anything follows from a contradiction (the principle of explosion), we can use `False.elim` to prove `P`.
+
+Tactics Used:
+- `intro`: Introduces a hypothesis into the local context.
+- `by_cases`: Branches the proof into two cases based on the truth value of a proposition, applying classical logic.
+- `exact`: Closes a goal if the provided proof term exactly matches the goal's expected type.
+- `False.elim`: Deduces any proposition from a contradiction (`False`).

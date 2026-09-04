@@ -1,0 +1,16 @@
+Title: Successor Addition (succ_add)
+
+Problem: Prove that `m.succ + n = (m + n).succ` for natural numbers `m` and `n`.
+
+Step-by-step Logic:
+1. We proceed by mathematical induction on `n`.
+2. Base case (`n = 0`): The goal is `m.succ + 0 = (m + 0).succ`. By the definition of addition, adding zero does nothing, so both sides simplify to `m.succ`. This is definitionally equal, so it's solved by reflexivity.
+3. Inductive step (`n = k + 1` or `succ k`): We assume the inductive hypothesis `ih : m.succ + k = (m + k).succ`. The goal is to prove `m.succ + (k + 1) = (m + (k + 1)).succ`.
+4. We first rewrite the left side of the goal using the definition of addition (`Nat.add_succ`) to pull the successor out: `(m.succ + k).succ`.
+5. Now, the term `m.succ + k` appears in our goal, which matches the left side of our inductive hypothesis. We rewrite using `ih` to substitute it with `(m + k).succ`.
+6. Finally, we apply `Nat.add_succ` again to manipulate the right side so that both sides match perfectly.
+
+Tactics Used:
+- `induction`: Performs mathematical induction on a specified variable, creating base and inductive cases.
+- `rfl`: Proves equality by reflexivity when both sides are definitionally equal.
+- `rw`: Rewrites the goal using a given equality theorem or definition (like `Nat.add_succ` or an inductive hypothesis).
