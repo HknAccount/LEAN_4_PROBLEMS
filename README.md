@@ -26,7 +26,12 @@ For every problem, there are two corresponding files:
   - `02`: Addition with Zero on the Left (Using `induction`, `change`, `rw`, `rfl`)
   - `03`: Principle of Explosion (Using `intro`, `exact False.elim`)
 
-*(Days 3-15 are currently being worked on and will be populated as I continue my learning journey!)*
+- **DAY THREE:**
+  - `09`: Double Negation Elimination (Using `intro`, `by_cases`, `exact`, `False.elim`)
+  - `11`: Successor Addition (Using `induction`, `rfl`, `rw`)
+  - `19`: Transitivity of Implication (Using `intro`, `exact`)
+
+*(Days 4-15 are currently being worked on and will be populated as I continue my learning journey!)*
 
 ---
 *If you are new to Lean 4, feel free to read through the `.txt` explanation files for a beginner-friendly breakdown of how each proof works under the hood!*
