@@ -27,12 +27,12 @@ For every problem, there are two corresponding files:
   - `03`: Principle of Explosion (Using `intro`, `exact False.elim`)
 
 - **DAY THREE:**
-  - `09`: Double Negation Elimination (Using `intro`, `by_cases`, `exact`, `False.elim`)
-  - `11`: Successor Addition (Using `induction`, `rfl`, `rw`)
-  - `19`: Transitivity of Implication (Using `intro`, `exact`)
+  - `01`: Double Negation Elimination (Using `intro`, `by_cases`, `exact`, `False.elim`)
+  - `02`: Successor Addition (Using `induction`, `rfl`, `rw`)
+  - `03`: Transitivity of Implication (Using `intro`, `exact`)
 
 - **DAY FOUR:**
-  - `20`: Excluded Middle Irrefutable (Using `intro`, `apply`, `Or.inr`/`Or.inl`, `exact`)
+  - `01`: Excluded Middle Irrefutable (Using `intro`, `apply`, `Or.inr`/`Or.inl`, `exact`)
 
 *(Days 5-15 are currently being worked on and will be populated as I continue my learning journey!)*
 
