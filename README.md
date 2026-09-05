@@ -31,7 +31,10 @@ For every problem, there are two corresponding files:
   - `11`: Successor Addition (Using `induction`, `rfl`, `rw`)
   - `19`: Transitivity of Implication (Using `intro`, `exact`)
 
-*(Days 4-15 are currently being worked on and will be populated as I continue my learning journey!)*
+- **DAY FOUR:**
+  - `20`: Excluded Middle Irrefutable (Using `intro`, `apply`, `Or.inr`/`Or.inl`, `exact`)
+
+*(Days 5-15 are currently being worked on and will be populated as I continue my learning journey!)*
 
 ---
 *If you are new to Lean 4, feel free to read through the `.txt` explanation files for a beginner-friendly breakdown of how each proof works under the hood!*
