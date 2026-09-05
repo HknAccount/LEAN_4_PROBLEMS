@@ -1,0 +1,18 @@
+Title: Excluded Middle Irrefutable
+
+Problem: Prove that `¬¬(P ∨ ¬P)` for any proposition `P`. This demonstrates that the double negation of the law of excluded middle is provable even in intuitionistic logic.
+
+Step-by-step Logic:
+1. The goal is a negation `¬(P ∨ ¬P)`, which translates to `(P ∨ ¬P) → False`. So, we introduce the hypothesis `h : ¬(P ∨ ¬P)`.
+2. We need to derive `False`. We can do this by applying `h`, which then requires us to provide a proof of `P ∨ ¬P`.
+3. To prove `P ∨ ¬P`, we choose to prove the right side, `¬P` (which is `P → False`). We use `apply Or.inr`.
+4. Now we need to prove `P → False`. We assume `P` by introducing hypothesis `p : P`.
+5. Once again, our goal is `False`. We apply `h` once more, which requires us to prove `P ∨ ¬P`.
+6. This time, since we have `p : P`, we choose the left side of the disjunction using `apply Or.inl`.
+7. The goal becomes `P`, which exactly matches our hypothesis `p`. We use `exact p` to close the proof.
+
+Tactics Used:
+- `intro`: Introduces a hypothesis into the local context.
+- `apply`: Applies a function or theorem to the current goal, replacing it with the required premises.
+- `Or.inr` / `Or.inl`: Constructs a proof of a disjunction `A ∨ B` by providing a proof of the right (`B`) or left (`A`) side, respectively.
+- `exact`: Closes a goal if the provided proof term exactly matches the goal's expected type.
