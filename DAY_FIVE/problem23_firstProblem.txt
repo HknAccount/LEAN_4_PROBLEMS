@@ -1,0 +1,17 @@
+Title: Addition Commutativity
+
+Problem: Prove that `m + n = n + m` for any natural numbers `m` and `n`. This demonstrates that addition over natural numbers is commutative.
+
+Step-by-step Logic:
+1. First, we tell the computer we are doing induction on the variable `n`. This means we are going to prove our math rule by climbing a ladder: first proving it for zero, and then proving that we can always take one more step.
+2. We start with the fixed `zero` case. The computer replaces every `n` with `0`, changing our goal to `m + 0 = 0 + m`. Reading our list of rules from left to right, the first rule changes the left side to just `m`. The second rule changes the right side to just `m`. Now our goal is simply `m = m`. The first step is complete!
+3. Next, we prove the rule for the "next number" using the fixed keyword `succ`. We tell the computer to replace `n` with `succ d`. The computer also hands us our custom tool `ih`, which lets us assume the previous step: `m + d = d + m`.
+4. Our brand new goal looks like this: `m + succ d = succ d + m`.
+5. To finish the proof, we use our three rewrite commands, reading them from left to right to change the brackets step-by-step. First, a built-in rule (`Nat.add_succ`) looks at the left side and pulls the "succ" to the outside of the brackets. Our goal becomes: `succ (m + d) = succ d + m`.
+6. Second, our custom `ih` tool jumps inside those left brackets! It finds the `(m + d)` and flips it. Our goal becomes: `succ (d + m) = succ d + m`.
+7. Finally, a built-in rule (`Nat.succ_add`) looks at the right side and pulls that "succ" to the outside of the brackets too. Our goal becomes: `succ (d + m) = succ (d + m)`.
+8. Because both sides are now perfectly identical, the computer knows the equation is completely true!
+
+Tactics Used:
+- `induction`: Proves a theorem by structural induction on a given variable.
+- `rw`: Rewrites the goal using the given equations.
