@@ -1,4 +1,4 @@
-# LEAN 4: 15-Day LeetProof Learning Portfolio
+# LEAN 4:  LeetProof Learning Portfolio
 
 Welcome to my **Lean 4 Learning Portfolio**! This repository tracks my day-by-day progress in learning formal methods and interactive theorem proving using Lean 4. 
 
