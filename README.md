@@ -37,7 +37,6 @@ For every problem, there are two corresponding files:
 - **DAY FIVE:**
   - `01`: Addition Commutativity (Using `induction`, `rw`)
 
-*(Days 6-15 are currently being worked on and will be populated as I continue my learning journey!)*
 
 ---
 *If you are new to Lean 4, feel free to read through the `.txt` explanation files for a beginner-friendly breakdown of how each proof works under the hood!*
